@@ -15,6 +15,14 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
     }
+    void Start()
+    {
+        CameraThirdPerson cam = GetComponentInChildren<CameraThirdPerson>();
+        if (cam)
+        {
+            cam.target = transform;
+        }
+    }
 
     void Update()
     {
