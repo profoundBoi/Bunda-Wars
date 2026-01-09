@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Rotation")]
     public float rotationSpeed = 180f;
+    private CameraThirdPerson cam;
 
     [Header("Shooting")]
     public Transform firePoint;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
+        cam = GetComponentInChildren<CameraThirdPerson>();
     }
 
     void Update()
@@ -48,6 +50,8 @@ public class PlayerController : MonoBehaviour
             shootPressed = false;
         }
     }
+
+
 
     void Rotate()
     {
@@ -120,6 +124,9 @@ public class PlayerController : MonoBehaviour
     void OnLook(InputValue value)
     {
         lookInput = value.Get<Vector2>();
+
+        if (cam != null)
+            cam.SetLookInput(lookInput.y);
     }
 
     void OnJump(InputValue value)

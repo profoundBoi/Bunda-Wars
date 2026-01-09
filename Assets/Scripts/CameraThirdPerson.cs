@@ -20,6 +20,7 @@ public class CameraThirdPerson : MonoBehaviour
     {
         if (!target) return;
 
+        // Vertical look (mouse Y / right stick Y)
         pitch -= lookInput.y * lookSpeed * Time.deltaTime;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
@@ -36,7 +37,15 @@ public class CameraThirdPerson : MonoBehaviour
 
         transform.rotation = rotation;
     }
+    public void SetLookInput(float lookY)
+    {
+        lookInput.y = lookY;
+    }
 
     // INPUT SYSTEM EVENT
- 
+    void OnLook(InputValue value)
+    {
+        lookInput = value.Get<Vector2>();
+    }
+
 }
