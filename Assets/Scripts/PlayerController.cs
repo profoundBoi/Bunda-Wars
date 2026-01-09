@@ -4,9 +4,11 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 6f;
-    public float jumpHeight = 1.5f;
-    public float gravity = -9.81f;
+    public float moveSpeed = 7f;
+    public float gravity = -22f;
+
+    [Header("Jump / Bounce")]
+    public float bounceForce = 12f;
 
     [Header("Rotation")]
     public float rotationSpeed = 180f;
@@ -16,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookInput;
     private Vector3 velocity;
 
+    private bool jumpPressed;
+
     void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -24,35 +28,46 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Rotate();
-        Move();
-        ApplyGravity();
+        HandleMovement();
+        HandleJumpAndGravity();
     }
 
     void Rotate()
     {
         float turn = lookInput.x;
-
-        if (Mathf.Abs(turn) > 0.01f)
-        {
-            transform.Rotate(Vector3.up * turn * rotationSpeed * Time.deltaTime);
-        }
+        transform.Rotate(Vector3.up * turn * rotationSpeed * Time.deltaTime);
     }
 
-    void Move()
+    void HandleMovement()
     {
         Vector3 move =
             transform.right * moveInput.x +
             transform.forward * moveInput.y;
 
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        // Horizontal movement stored (no Move call yet)
+        velocity.x = move.x * moveSpeed;
+        velocity.z = move.z * moveSpeed;
     }
 
-    void ApplyGravity()
+    void HandleJumpAndGravity()
     {
-        if (controller.isGrounded && velocity.y < 0)
-            velocity.y = -2f;
+        if (controller.isGrounded)
+        {
+            if (velocity.y < 0)
+                velocity.y = -2f;
 
-        velocity.y += gravity * Time.deltaTime;
+            if (jumpPressed)
+            {
+                velocity.y = bounceForce;
+                jumpPressed = false;
+            }
+        }
+        else
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }
+
+        // ONE Move call (always runs)
         controller.Move(velocity * Time.deltaTime);
     }
 
@@ -67,9 +82,9 @@ public class PlayerController : MonoBehaviour
         lookInput = value.Get<Vector2>();
     }
 
-    void OnJump()
+    void OnJump(InputValue value)
     {
-        if (controller.isGrounded)
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        if (value.isPressed)
+            jumpPressed = true;
     }
 }
