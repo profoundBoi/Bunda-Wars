@@ -157,8 +157,8 @@ Transform:
   m_GameObject: {fileID: 1238454860399274376}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.005, y: 0.0000030722, z: -38.4}
-  m_LocalScale: {x: 87.28073, y: 87.28073, z: 87.28073}
+  m_LocalPosition: {x: 31.3, y: -11.7, z: 11}
+  m_LocalScale: {x: 133.5657, y: 133.5657, z: 133.5657}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 210237559558808097}
@@ -576,8 +576,8 @@ Transform:
   m_GameObject: {fileID: 4385210656777501983}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.205, y: 0.0000028882, z: -38.4}
-  m_LocalScale: {x: 87.28073, y: 87.28073, z: 87.28073}
+  m_LocalPosition: {x: -45.5, y: -11.7, z: 11}
+  m_LocalScale: {x: 133.5657, y: 133.5657, z: 133.5657}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 210237559558808097}
@@ -1448,13 +1448,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8987680778355428045}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.24359612, y: -0.0045121466, z: 0.0023499192, w: -0.9698635}
+  m_LocalPosition: {x: -2.1946044, y: 9.21, z: -14.2300005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8014098456878341691}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 28.199, y: 0.495, z: -0.153}
 --- !u!20 &2718112929594193430
 Camera:
   m_ObjectHideFlags: 0
@@ -1486,11 +1486,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 1.34
+  far clip plane: 5000
+  field of view: 42
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1570,6 +1570,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386c1e6db81352c4693cd2a013b876a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  offset: {x: 0, y: 3, z: -6}
+  target: {fileID: 8499054447130613660}
+  offset: {x: 0, y: 4.45, z: -12.71}
   followSpeed: 10

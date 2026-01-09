@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,32 +8,42 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 1.5f;
     public float gravity = -9.81f;
 
+    [Header("Rotation")]
+    public float rotationSpeed = 180f;
+
     private CharacterController controller;
     private Vector2 moveInput;
+    private Vector2 lookInput;
     private Vector3 velocity;
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
     }
-    void Start()
-    {
-        CameraThirdPerson cam = GetComponentInChildren<CameraThirdPerson>();
-        if (cam)
-        {
-            cam.target = transform;
-        }
-    }
 
     void Update()
     {
+        Rotate();
         Move();
         ApplyGravity();
     }
 
+    void Rotate()
+    {
+        float turn = lookInput.x;
+
+        if (Mathf.Abs(turn) > 0.01f)
+        {
+            transform.Rotate(Vector3.up * turn * rotationSpeed * Time.deltaTime);
+        }
+    }
+
     void Move()
     {
-        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
+        Vector3 move =
+            transform.right * moveInput.x +
+            transform.forward * moveInput.y;
+
         controller.Move(move * moveSpeed * Time.deltaTime);
     }
 
@@ -46,9 +57,14 @@ public class PlayerController : MonoBehaviour
     }
 
     // INPUT SYSTEM EVENTS
-    void OnMove(UnityEngine.InputSystem.InputValue value)
+    void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+    }
+
+    void OnLook(InputValue value)
+    {
+        lookInput = value.Get<Vector2>();
     }
 
     void OnJump()

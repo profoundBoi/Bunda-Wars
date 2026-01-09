@@ -11,13 +11,17 @@ public class CameraThirdPerson : MonoBehaviour
     {
         if (!target) return;
 
-        Vector3 desiredPos = target.position + offset;
+        // Rotate offset with player rotation
+        Vector3 rotatedOffset = target.rotation * offset;
+
+        Vector3 desiredPos = target.position + rotatedOffset;
+
         transform.position = Vector3.Lerp(
             transform.position,
             desiredPos,
             followSpeed * Time.deltaTime
         );
 
-        transform.LookAt(target);
+        transform.LookAt(target.position + Vector3.up * 1.5f);
     }
 }
