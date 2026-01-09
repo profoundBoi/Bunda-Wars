@@ -13,16 +13,27 @@ public class PlayerController : MonoBehaviour
     [Header("Rotation")]
     public float rotationSpeed = 180f;
 
+    [Header("Shooting")]
+    public Transform firePoint;
+    public GameObject bulletPrefab;
+    public float shootCooldown = 0.2f;
+
+    private float nextShootTime;
+
     private CharacterController controller;
+    private Camera playerCamera;
+
     private Vector2 moveInput;
     private Vector2 lookInput;
     private Vector3 velocity;
 
     private bool jumpPressed;
+    private bool shootPressed;
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        playerCamera = GetComponentInChildren<Camera>();
     }
 
     void Update()
@@ -30,6 +41,12 @@ public class PlayerController : MonoBehaviour
         Rotate();
         HandleMovement();
         HandleJumpAndGravity();
+
+        if (shootPressed)
+        {
+            Shoot();
+            shootPressed = false;
+        }
     }
 
     void Rotate()
@@ -44,7 +61,6 @@ public class PlayerController : MonoBehaviour
             transform.right * moveInput.x +
             transform.forward * moveInput.y;
 
-        // Horizontal movement stored (no Move call yet)
         velocity.x = move.x * moveSpeed;
         velocity.z = move.z * moveSpeed;
     }
@@ -67,10 +83,34 @@ public class PlayerController : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;
         }
 
-        // ONE Move call (always runs)
         controller.Move(velocity * Time.deltaTime);
     }
 
+    void Shoot()
+    {
+        if (Time.time < nextShootTime) return;
+        nextShootTime = Time.time + shootCooldown;
+
+        Ray aimRay = new Ray(
+            playerCamera.transform.position,
+            playerCamera.transform.forward
+        );
+
+        Vector3 targetPoint;
+
+        if (Physics.Raycast(aimRay, out RaycastHit hit, 100f))
+            targetPoint = hit.point;
+        else
+            targetPoint = aimRay.origin + aimRay.direction * 100f;
+
+        Vector3 direction = (targetPoint - firePoint.position).normalized;
+
+        GameObject bullet = Instantiate(
+            bulletPrefab,
+            firePoint.position,
+            Quaternion.LookRotation(direction)
+        );
+    }
     // INPUT SYSTEM EVENTS
     void OnMove(InputValue value)
     {
@@ -86,5 +126,11 @@ public class PlayerController : MonoBehaviour
     {
         if (value.isPressed)
             jumpPressed = true;
+    }
+
+    void OnFire(InputValue value)
+    {
+        if (value.isPressed)
+            shootPressed = true;
     }
 }
