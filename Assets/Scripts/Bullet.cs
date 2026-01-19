@@ -4,6 +4,9 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 40f;
     public float lifeTime = 3f;
+    public int damage = 25;
+
+    [HideInInspector] public string ownerTag;
 
     void Start()
     {
@@ -17,7 +20,14 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // TODO: Damage logic
+        if (other.CompareTag(ownerTag)) return;
+
+        PlayerHealth health = other.GetComponent<PlayerHealth>();
+        if (health != null)
+        {
+            health.TakeDamage(damage, ownerTag);
+        }
+
         Destroy(gameObject);
     }
 }

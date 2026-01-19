@@ -35,4 +35,22 @@ public class SpawnManager : MonoBehaviour
         if (cc != null)
             cc.enabled = true;
     }
+
+    public void Respawn()
+    {
+        GameObject spawn = GameObject.FindGameObjectWithTag(
+            CompareTag("Player1") ? "Player1Spawn" : "Player2Spawn"
+        );
+
+        CharacterController cc = GetComponent<CharacterController>();
+
+        if (cc != null)
+            cc.enabled = false;
+
+        transform.position = spawn.transform.position;
+        transform.rotation = spawn.transform.rotation;
+
+        if (cc != null)
+            cc.enabled = true;
+    }
 }

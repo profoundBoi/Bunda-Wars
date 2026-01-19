@@ -1239,6 +1239,7 @@ GameObject:
   - component: {fileID: 6609046307896928098}
   - component: {fileID: -9067120009814281971}
   - component: {fileID: 5221051707967262697}
+  - component: {fileID: 7809987773927362205}
   m_Layer: 0
   m_Name: Character_cbb54a
   m_TagString: Untagged
@@ -1384,6 +1385,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3f35af621b2da49b7e92f24a24e774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7809987773927362205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7513649923684426155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e28dcb1708243e84fa3356ba2c2e0b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &8517618513714662579
 GameObject:
   m_ObjectHideFlags: 0

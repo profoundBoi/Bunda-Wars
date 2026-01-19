@@ -113,7 +113,10 @@ public class PlayerController : MonoBehaviour
             bulletPrefab,
             firePoint.position,
             Quaternion.LookRotation(direction)
+
         );
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.ownerTag = gameObject.tag;
     }
     // INPUT SYSTEM EVENTS
     void OnMove(InputValue value)
