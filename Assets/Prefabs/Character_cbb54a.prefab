@@ -1240,6 +1240,7 @@ GameObject:
   - component: {fileID: -9067120009814281971}
   - component: {fileID: 5221051707967262697}
   - component: {fileID: 7809987773927362205}
+  - component: {fileID: 7356816125441414807}
   m_Layer: 0
   m_Name: Character_cbb54a
   m_TagString: Untagged
@@ -1398,6 +1399,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
+  healthBar: {fileID: 2628919169948058160}
+--- !u!114 &7356816125441414807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7513649923684426155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09eac3894eb522246a970b62de2b4825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kills: 0
+  killText: {fileID: 1920152184397693405}
 --- !u!1 &8517618513714662579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,6 +1636,7 @@ GameObject:
   - component: {fileID: 3135562697094490473}
   - component: {fileID: 500298359276280053}
   - component: {fileID: 8193076285852916672}
+  - component: {fileID: 2567780030797951037}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -1762,6 +1780,20 @@ MonoBehaviour:
   lookSpeed: 120
   minPitch: -30
   maxPitch: 45
+--- !u!114 &2567780030797951037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987680778355428045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 756897dea0c2c1548859e6b9bc61ff4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 0.2
+  duration: 0.15
 --- !u!1001 &198042893919998240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1770,6 +1802,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8014098456878341691}
     m_Modifications:
+    - target: {fileID: 4421037190049459593, guid: 1326a1c8f94d8e14a8365005532c553f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5136470821710435731, guid: 1326a1c8f94d8e14a8365005532c553f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1850,17 +1886,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5296177460462022168, guid: 1326a1c8f94d8e14a8365005532c553f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296177460462022168, guid: 1326a1c8f94d8e14a8365005532c553f, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296177460462022168, guid: 1326a1c8f94d8e14a8365005532c553f, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.28
+    - target: {fileID: 6100683088524114193, guid: 1326a1c8f94d8e14a8365005532c553f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6207495653357679874, guid: 1326a1c8f94d8e14a8365005532c553f, type: 3}
       propertyPath: m_Name
@@ -1875,6 +1903,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1326a1c8f94d8e14a8365005532c553f, type: 3}
+--- !u!114 &1920152184397693405 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1736796038193434877, guid: 1326a1c8f94d8e14a8365005532c553f, type: 3}
+  m_PrefabInstance: {fileID: 198042893919998240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2628919169948058160 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2793457690169070352, guid: 1326a1c8f94d8e14a8365005532c553f, type: 3}
+  m_PrefabInstance: {fileID: 198042893919998240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5041777626521388211 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5136470821710435731, guid: 1326a1c8f94d8e14a8365005532c553f, type: 3}
