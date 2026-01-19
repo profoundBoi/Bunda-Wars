@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Player2Spawn
+  - Player1Spawn
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX
