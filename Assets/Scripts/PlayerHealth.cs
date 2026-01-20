@@ -10,28 +10,38 @@ public class PlayerHealth : MonoBehaviour
     public Slider healthBar;
 
     private SpawnManager initializer;
+    private bool isDead = false;
 
     void Start()
     {
         initializer = GetComponent<SpawnManager>();
-        currentHealth = maxHealth;
+        ResetHealth();
+    }
 
+    void ResetHealth()
+    {
+        currentHealth = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
+        isDead = false;
     }
 
     public void TakeDamage(int damage, string attackerTag)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 
-        // Update immediately (THIS fixes your issue)
         healthBar.value = currentHealth;
 
         GetComponentInChildren<CameraShake>()?.Shake();
 
         if (currentHealth <= 0)
+        {
+            isDead = true;
             StartCoroutine(DieAndRespawn(attackerTag));
+        }
     }
 
     IEnumerator DieAndRespawn(string attackerTag)
@@ -39,12 +49,12 @@ public class PlayerHealth : MonoBehaviour
         GameObject killer = GameObject.FindGameObjectWithTag(attackerTag);
         GameManager.Instance.RegisterKill(killer);
 
-        // Optional: small delay so death is visible
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
 
         initializer.Respawn();
 
-        currentHealth = maxHealth;
-        healthBar.value = currentHealth;
+        yield return null;
+
+        ResetHealth();
     }
 }
